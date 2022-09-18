@@ -1,43 +1,54 @@
 #include <stdio.h>
 #include <string.h>
+#include "./parser.h"
+#include "./ui.h"
 
-void cleanScreen(int distance) {
-  while(distance > 0) {
-    printf("\n");
-    distance--;
-  }
-}
 
-int inputParser(char* input, char* comand) {
-  if(strlen(input) > 5){return 0;}
-  if(strcmp(input, comand) == 0) {
-    return 0;
-  }
-
-  // el comando no existe en la lista
-  return 1;
-}
-
-void terminal () {
-  char* comands[3] = {"exit", "add", "view"}; 
-  int exit = 1;
-  char input[100];
-  int res;
-
-  while(exit == 1) {
-    cleanScreen(10);
-    printf("> ");
-    scanf("\n%s", input);
-
-    for(int i = 0; i < 3; i++){
-      char* comand = comands[i];
-      res = inputParser(input, comand);
-
-      if(res == 0) {
-        exit = res;
-        break;
-      }
+void cleanScreen(int distance)
+{
+  while (distance > 0)
+    {
+      printf("\n");
+      distance--;
     }
-    /* exit = 0; */
-  }
+}
+
+void terminalF()
+{
+  char input[100];
+  struct Response terminal;
+  terminal.title = "USER MANAGER";
+  terminal.message = "comandos integrados: "
+    "\n\t* -- clear."
+    "\n\t* -- exit."
+    "\n\t* -- help.";
+  terminal.status = 1;
+  terminal.statusInfo = "init";
+  char *statusTerm[3] = {"error", "success", "info"};
+
+  while (terminal.status == 1)
+    {
+      cleanScreen(40);
+      printUI(terminal);
+
+      for(int i = 0; i <= 2; i++){
+        if (strcmp(terminal.statusInfo, statusTerm[i]) == 0){
+          terminal.title = "USER MANAGER";
+          terminal.message = "comandos integrados: "
+            "\n\t* -- clear."
+            "\n\t* -- exit."
+            "\n\t* -- help.";
+          terminal.status = 1;
+          terminal.statusInfo = "init";
+          sleep(2);
+          cleanScreen(40);
+          printUI(terminal);
+          break;
+        }
+      }
+
+      printf("\t> ");
+      scanf("\n%s", input);
+      terminal = parser(input, terminal);
+    }
 }

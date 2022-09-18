@@ -3,6 +3,6 @@
 #include "./components/terminal.h"
 
 int main(){
-  terminal();
+  terminalF();
   return 0;
 }
