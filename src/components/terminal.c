@@ -1,43 +1,60 @@
 #include <stdio.h>
 #include <string.h>
+#include "./parser.h"
+#include "./ui.h"
 
-void cleanScreen(int distance) {
-  while(distance > 0) {
-    printf("\n");
-    distance--;
-  }
-}
+struct Response initState();
+void clean();
 
-int inputParser(char* input, char* comand) {
-  if(strlen(input) > 5){return 0;}
-  if(strcmp(input, comand) == 0) {
-    return 0;
-  }
-
-  // el comando no existe en la lista
-  return 1;
-}
-
-void terminal () {
-  char* comands[3] = {"exit", "add", "view"}; 
-  int exit = 1;
+void terminalF()
+{
   char input[100];
-  int res;
+  struct Response terminal;
+  terminal = initState();
+  char *statusTerm[3] = {"error", "success", "info"};
 
-  while(exit == 1) {
-    cleanScreen(10);
-    printf("> ");
-    scanf("\n%s", input);
-
-    for(int i = 0; i < 3; i++){
-      char* comand = comands[i];
-      res = inputParser(input, comand);
-
-      if(res == 0) {
-        exit = res;
-        break;
+  while (terminal.status == 1)
+    {
+      clean();
+      printUI(terminal);
+      for(int i = 0; i <= 2; i++){
+        if(strcmp(terminal.statusInfo, "info") == 0){
+          break;
+        }
+        if (strcmp(terminal.statusInfo, statusTerm[i]) == 0){
+          terminal = initState();
+          sleep(2);
+          clean();
+          printUI(terminal);
+          break;
+        }
       }
+      printf("\t> ");
+      scanf("\n%s", input);
+      terminal = parser(input, terminal);
     }
-    /* exit = 0; */
-  }
+}
+struct Response initState() 
+{
+  struct Response newState;
+  newState.title = "USER MANAGER";
+  newState.message = "comandos integrados: "
+    "\n\t|-----------------------------------------"
+    "\n\t| clear."
+    "\n\t| exit."
+    "\n\t| help.";
+  newState.status = 1;
+  newState.statusInfo = "init";
+
+  return newState;
+};
+
+void clean()
+{
+  int distance = 0;
+  while (distance < 40)
+    {
+      printf("\n");
+      distance++;
+    }
 }
