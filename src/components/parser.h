@@ -1,10 +1,10 @@
 #pragma once
 
-struct Response {
+struct State {
   char *title;
   int status;
   char *message;
   char *statusInfo;
 };
 
-struct Response parser(char *, struct Response);
+struct State parser(char *, struct State);

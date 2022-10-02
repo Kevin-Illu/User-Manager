@@ -8,4 +8,4 @@
 /* #define cWhite "\033[0;37m" */
 
 
-void printUI(struct Response);
+void printUI(struct State);

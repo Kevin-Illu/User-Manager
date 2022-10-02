@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "./parser.h"
+#include "./database.h"
 
-struct Response parser(char *input, struct Response state)
+struct State parser(char *input, struct State state)
 {
-  struct Response newState;
+  struct State newState;
   newState.title = state.title;
   newState.message = state.message;
   newState.status = 1;
@@ -13,6 +14,13 @@ struct Response parser(char *input, struct Response state)
 
   for (int i = 0; i <= 2; i++)
     {
+      if (strcmp(input, "database") == 0) {
+        database();
+        isInvalidComand = 1;
+        newState.status = 0;
+        newState.statusInfo = "success";
+        break;
+      }
       if (strcmp(input, "exit") == 0)
       {
         isInvalidComand = 1;

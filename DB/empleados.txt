@@ -1,0 +1,1 @@
+([codigoEmpleado: 1], [nombre: kevin], [sexo: m], [cargo: auxiliar], [dpto: finanzas], [ciudad: guatemala], [salario: 5000], [fechaIngreso: 04/08/2022])

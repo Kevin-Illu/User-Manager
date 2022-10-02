@@ -3,7 +3,7 @@
 #include "./parser.h"
 #include "ui.h"
 
-void printUI(struct Response response)
+void printUI(struct State current)
 {
   char *init;
   char *error;
@@ -62,13 +62,13 @@ void printUI(struct Response response)
     "\t              (____                       \n";
  
   char *img;
-  if(strcmp(response.statusInfo, "error") == 0){
+  if(strcmp(current.statusInfo, "error") == 0){
     img = error;
-  } else if (strcmp(response.statusInfo, "success") == 0){
+  } else if (strcmp(current.statusInfo, "success") == 0){
     img = success;
-  } else if (strcmp(response.statusInfo, "info") == 0) {
+  } else if (strcmp(current.statusInfo, "info") == 0) {
     img = info;
-  } else if (strcmp(response.statusInfo, "init") == 0) {
+  } else if (strcmp(current.statusInfo, "init") == 0) {
     img = init;
   }
   printf("%s\n", img);
@@ -78,7 +78,7 @@ void printUI(struct Response response)
          "\t -----------------------------------------\t\n"
          "\t| %s\t\t\t\n"
          "\t _________________________________________\t\n",
-         response.title, response.message
+         current.title, current.message
          );
 }
 
