@@ -15,13 +15,13 @@ las acciones seran las que el usuario ingrese por
 el input estas pueden ser las siguientes.
 
 - DATABASE
- - create
- - read
- - update
- - delete
+  - create
+  - read
+  - update
+  - delete
 - APP OPTIONS
- - change theme
- - change user data
+  - change theme
+  - change user data
 
 ### DISPACHER
 este se encarga de despachar la acccion que genere
