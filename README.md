@@ -26,6 +26,6 @@ el cli contiene los siguientes comandos.
 
 | Option            | Description                               |
 | ----------------- | ----------------------------------------- |
-| `clear`           | limpia la pantalla                        |
+| `DataBase`        | limpia la pantalla                        |
 | `exit`            | salir de la aplicacion                    |
 | `help`            | optener una lista de todos los comandos   |
